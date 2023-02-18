@@ -1,0 +1,15 @@
+.wrap {
+    margin-top: 36px;
+    .header-title {
+        font-weight: 600;
+        font-size: 1.2rem;
+        margin: 12px 0;
+    }
+    .show-more {
+        font-size: 12px;
+        margin-top: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+}

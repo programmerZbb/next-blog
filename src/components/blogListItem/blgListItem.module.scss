@@ -1,0 +1,19 @@
+.wrap {
+  margin: 10px 0;
+  padding: 12px 8px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 3%), 0 1px 6px -1px rgb(0 0 0 / 2%), 0 2px 4px 0 rgb(0 0 0 / 2%);
+  &:hover {
+    box-shadow: 0px 4px 10px rgba(47, 83, 134, 0.12);
+  }
+  .link {
+    font-size: 16px;
+    line-height: 22px;
+    margin-bottom: 6px;
+  }
+  .date {
+    color: #696969;
+    font-size: 12px;
+  }
+}
