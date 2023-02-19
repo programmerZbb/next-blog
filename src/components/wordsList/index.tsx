@@ -11,10 +11,10 @@ export const WordsList: FC<{
   allPostsData: AllPostsData;
 }> = ({ allPostsData }) => {
   return (
-    <ListWrap title="自留地" showMoreLink="">
+    <ListWrap title="自留地" showMoreLink="https://github.com/programmerZbb/notes">
       <>
         {allPostsData.map((data) => (
-          <BlogListItem postsData={data} key={data.id} />
+          <BlogListItem href={`/words/${data.id}`} postsData={data} key={data.id} />
         ))}
       </>
     </ListWrap>

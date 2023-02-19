@@ -16,7 +16,7 @@ export const ListWrap: FC<
       <div className={styles.headerTitle}>{title}</div>
       {children}
       <div className={styles.showMore}>
-        <Link legacyBehavior href={showMoreLink}>
+        <Link legacyBehavior target={"_blank"} href={showMoreLink}>
           查看更多
         </Link>
         <Image src="/blog/right-arrow.svg" alt="" width={16} height={16} />

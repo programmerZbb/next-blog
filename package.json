@@ -13,11 +13,15 @@
     "@types/node": "18.13.0",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
+    "antd": "^5.2.1",
     "classnames": "^2.3.2",
     "date-fns": "^2.29.3",
+    "dompurify": "^3.0.0",
     "eslint": "8.34.0",
     "eslint-config-next": "13.1.6",
     "gray-matter": "^4.0.3",
+    "lodash": "^4.17.21",
+    "marked": "^4.2.12",
     "next": "13.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -27,6 +31,9 @@
     "typescript": "4.9.5"
   },
   "devDependencies": {
+    "@types/dompurify": "^2.4.0",
+    "@types/lodash": "^4.14.191",
+    "@types/marked": "^4.0.8",
     "sass": "^1.58.3"
   }
 }

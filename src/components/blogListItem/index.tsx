@@ -7,12 +7,13 @@ import styles from "./blgListItem.module.scss";
 
 export const BlogListItem: FC<{
   postsData: PostsData;
-}> = ({postsData: {id, title, date}}) => {
+  href?: string;
+}> = ({postsData: {id, title, date}, href}) => {
   
   return (
     <div className={styles.wrap}>
       <div className={styles.link}>
-        <Link legacyBehavior href={""}>
+        <Link legacyBehavior href={href ?? `/posts/${id}`}>
           {title || '无题'}
         </Link>
       </div>

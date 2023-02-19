@@ -3,9 +3,16 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 6rem;
+  // padding: 6rem;
+  padding: 18px;
   min-height: 100vh;
-  background-color: rgba(158, 158, 158, 0.1);
+  // background-color: rgba(158, 158, 158, 0.1);
+  // background: url('/public/imgs/home-bg.jpeg') no-repeat center, rgba(158, 158, 158, 0.1);
+}
+.wrap {
+  margin: 0 auto 108px;
+  max-width: 612px;
+  // background-color: rgba(158, 158, 158, 0.1);
 }
 
 .description {
