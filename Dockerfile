@@ -11,7 +11,7 @@ COPY . /app
 
 RUN npm config set registry https://registry.npm.taobao.org
 
-# 不能再当前目录下执行打包命令
+# 不能再当前目录下执行打包命令，因为此时已经进入了docker内部文件
 RUN npm i
 
 RUN npm run build
@@ -21,5 +21,5 @@ RUN npm run build
 
 
 # 让nginx 服务卡到前台不结束，防止docker容器关闭
-CMD npm run start -g "daemon off;"
+CMD npm run start
 # CMD nginx
