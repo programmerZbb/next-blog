@@ -1,3 +1,5 @@
+@import "../../common/styles/markdown-view.scss";
+
 .main {
     margin: 0 auto 108px;
     max-width: 912px;
@@ -11,6 +13,7 @@
     position: sticky;
     top: 0px;
     background-color: #fff;
+    z-index: 10;
     // margin: 0 -40px;
     // padding: 0 20px;
     padding: 12px 12px;
@@ -24,52 +27,6 @@
         line-height: 28px;
         color: #696969;
         font-size: 16px;
-    }
-}
-.content {
-    // margin: 10px 0;
-    padding: 16px 28px;
-    background-color: #fff;
-    font-size: 1em;
-    border-radius: 8px;
-    blockquote {
-        border-left: 4px solid #bd4147;
-        margin: 12px 8px;
-        background: rgba(242, 242, 242, 1);
-        color: rgba(41, 41, 41, 1);
-        font-size: 90%;
-        font-style: italic;
-        font-weight: 500;
-        padding: 16px 12px;
-        &>* {
-            margin: 0;
-        }
-    }
-    img {
-        max-width: 100%;
-        object-fit: cover;
-    }
-    pre code {
-        display: block;
-        padding: 16px 32px;
-        color: rgba(0, 0, 0, 0.88);
-        font-size: 14px;
-        font-family: 'Lucida Console',Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;
-        line-height: 2;
-        white-space: pre;
-        background: white;
-        border: 1px solid #e9e9e9;
-        border-radius: 6px;
-        max-width: 100%;
-        white-space: pre-wrap;
-    }
-    code {
-        margin: 0 1px;
-        padding: 0.2rem 0.4rem;
-        font-size: 90%;
-        color: #bd4147;
-        background-color: #f7f7f9;
-        border-radius: 0.25rem;
     }
 }
 .back-home {

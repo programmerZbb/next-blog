@@ -29,7 +29,7 @@ export default function Post({ postData }: { postData: FullPostData }) {
             </div>
             <div
               id="preview"
-              className={styles.content}
+              className={styles.mdView}
               dangerouslySetInnerHTML={{ __html: contentHtml }}
             />
           </section>
