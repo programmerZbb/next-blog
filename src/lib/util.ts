@@ -4,6 +4,7 @@ import matter from "gray-matter";
 import { remark } from "remark";
 import html from "remark-html";
 import { marked, Renderer } from 'marked'
+import { load } from 'cheerio'
 // import * as DOMPurify from 'dompurify'
 // console.log(DOMPurify.sanitize, sanitize,'------777777777')
 
@@ -31,6 +32,15 @@ export function getPostsConf(dir: string) {
   return allPostsData.sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
+const HeadConf = [
+  'h1',
+  'h2',
+  'h3',
+  'h4',
+  'h5',
+  'h6'
+];
+
 /**
  * 获取所有可能的id提供给
  */
@@ -52,6 +62,20 @@ export function getAllPostIdsByDir(dir: string) {
 }
 
 /**
+ * 给html head加id
+ */
+const addIdForHtml = (html: string): string => {
+  const $ = load(html)
+  for (let head of HeadConf) {
+    $(head).each(function(i, ele) {
+      $(this).attr('id', $(this).text())
+    })
+  }
+  // cur.attr('id', cur[0])
+  return $.html()
+}
+
+/**
  * 通过id获取post内容
  */
 export async function getPostDataByDir(dir: string, id: string) {
@@ -62,7 +86,7 @@ export async function getPostDataByDir(dir: string, id: string) {
 
   // use remark to convert markdown into html string
   const processedContent = await remark().use(html).process(matterRes.content);
-  const contentHtml = processedContent.toString();
+  const contentHtml = addIdForHtml(processedContent.toString());
 
   // const contentHtml = await marked(fileContents, {
   //   async: true,

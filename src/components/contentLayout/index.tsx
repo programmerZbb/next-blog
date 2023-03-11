@@ -4,12 +4,14 @@ import throttle from 'lodash/throttle'
 import classNames from 'classnames/bind'
 
 import { scrollTop } from '../../lib/scroll-top'
+import { useCopyWithSign } from '../../hooks/useCopyWithSign'
 import styles from './contentLayout.module.scss'
 
 const ctx = classNames.bind(styles)
 
 export const ContentLayout: FC<PropsWithChildren> = ({children}) => {
     const [showScrollTop, setShowScrollTop] = useState(false)
+    useCopyWithSign()
 
     const scrollTopEvent = useCallback(throttle((e: Event) => {
         if ((e.currentTarget as any)!.scrollY > 160) {
