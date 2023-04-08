@@ -9,12 +9,14 @@ COPY . /app
 
 # COPY ./chore/nginx/nginx.conf /usr/local/nginx/conf/nginx.conf
 
-RUN npm config set registry https://registry.npm.taobao.org
+RUN npm config set registry https://registry.npm.taobao.org \
+    && npm i \
+    && npm run build
 
 # 不能再当前目录下执行打包命令，因为此时已经进入了docker内部文件
-RUN npm i
+# RUN npm i
 
-RUN npm run build
+# RUN npm run build
 
 # COPY ./dist/ /app/nginx/html/
 # RUN cp ./dist/ /app/nginx/html/
