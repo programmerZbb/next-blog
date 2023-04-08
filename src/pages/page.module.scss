@@ -1,3 +1,5 @@
+@import "../styles/color";
+
 .main {
   display: flex;
   flex-direction: column;
@@ -19,6 +21,15 @@
   align-items: center;
   justify-content: center;
   padding: 16px 0;
+  a {
+    color: $text_3;
+    &:hover {
+      color: $text_2;
+    }
+    // &:visited {
+    //   color: $text_3;
+    // }
+  }
 }
 
 .description {

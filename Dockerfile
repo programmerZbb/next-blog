@@ -27,6 +27,6 @@ CMD npm run start
 # CMD nginx
 
 # 打包
-# sudo docker build -f -t programerzbb/blog:v3 .
+# sudo docker build --force-rm -t programerzbb/blog:v3 .
 # 启动
 # sudo docker run -itd -p 8000:3000 --rm programerzbb/blog:v3
