@@ -35,6 +35,9 @@ export default function Home({
           <BlogList allPostsData={allPostsData} />
           <WordsList allPostsData={allWordsData} />
         </main>
+        <footer className={styles.footer}>
+          <a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer">京ICP备2023006520号-1</a>
+        </footer>
       </ContentLayout>
     </>
   );

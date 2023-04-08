@@ -1,0 +1,10 @@
+// scss 变量无非两种
+// 1. 单个变量
+// 2. mixin和extends
+@mixin sexy_border {
+  border: {
+    color: #000;
+    width: 1px;
+    style: dashed;
+  }
+}

@@ -23,3 +23,6 @@ RUN npm run build
 # 让nginx 服务卡到前台不结束，防止docker容器关闭
 CMD npm run start
 # CMD nginx
+
+# 打包
+# sudo docker build -t programerzbb/blog:v2 .
