@@ -26,40 +26,42 @@ export const md2html = async (mdContent: string, hrefPrefix?: string) => {
       }, // 开启XSS防御
       handlers: {
         heading(state, node) {
-          const value = node.children[0].value
-          if (value != null) { // 如果写的不规范value是不存在的！
-            const item = {
-              key: node.depth + value,
-              href: (hrefPrefix ?? '') + '#' + value,
-              title: value,
-              level: node.depth,
-            }
-            // 记录目录
-            // 如果是更深层的目录
-            const level = node.depth
-            if (levelContainer[level - 1]) { // 如果存在父级
-              if (levelContainer[level - 1].children == null) {
-                levelContainer[level - 1].children = []
+          if (node.children != null && node.children[0] != null) {
+            const value = node.children[0].value
+            if (value != null) { // 如果写的不规范value是不存在的！
+              const item = {
+                key: node.depth + value,
+                href: (hrefPrefix ?? '') + '#' + value,
+                title: value,
+                level: node.depth,
               }
-              // 给父级建立关系
-              levelContainer[level - 1].children!.push(item)
-              if (level > (levelContainer.length - 1)) {
-                // 记录该目录
-                levelContainer.push(item)
-              } else {
-                // 记录该目录
-                levelContainer = [...levelContainer.slice(0, level), item]
+              // 记录目录
+              // 如果是更深层的目录
+              const level = node.depth
+              if (levelContainer[level - 1]) { // 如果存在父级
+                if (levelContainer[level - 1].children == null) {
+                  levelContainer[level - 1].children = []
+                }
+                // 给父级建立关系
+                levelContainer[level - 1].children!.push(item)
+                if (level > (levelContainer.length - 1)) {
+                  // 记录该目录
+                  levelContainer.push(item)
+                } else {
+                  // 记录该目录
+                  levelContainer = [...levelContainer.slice(0, level), item]
+                }
               }
             }
-          }
 
-          return {
-            type: 'element',
-            tagName: 'h' + node.depth,
-            properties: {
-              id: value,
-            },
-            children: state.all(node)
+            return {
+              type: 'element',
+              tagName: 'h' + node.depth,
+              properties: {
+                id: value,
+              },
+              children: state.all(node)
+            }
           }
         }
       },
