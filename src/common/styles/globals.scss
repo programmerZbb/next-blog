@@ -1,13 +1,18 @@
-@import "../styles/color";
+@import "./color";
 // @import "../styles/mixin";
+@import './various.scss';
+@import './mixin.scss';
 
 body, html {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
 }
 
-* {
-  box-sizing: border-box;
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
 }
 
 a {

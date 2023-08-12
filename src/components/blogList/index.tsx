@@ -11,7 +11,7 @@ export const BlogList: FC<{
   allPostsData: AllPostsData;
 }> = ({ allPostsData }) => {
   return (
-    <ListWrap title="技术博客" showMoreLink="https://github.com/programmerZbb/notes">
+    <ListWrap title="技术博客" showMoreLink="/article-list">
       <>
         {allPostsData.map((data) => (
           <BlogListItem postsData={data} key={data.id} />

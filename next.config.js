@@ -27,6 +27,7 @@ const nextConfig = {
 
     return config;
   },
+  compress: true, // 开启静态资源压缩
 };
 
 module.exports = nextConfig;

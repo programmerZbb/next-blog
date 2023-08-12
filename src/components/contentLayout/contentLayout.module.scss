@@ -6,8 +6,8 @@
   // padding: 6rem;
   padding: 0 18px;
   min-height: 100vh;
-  background-color: rgba(158, 158, 158, 0.1);
-  min-width: 912px;
+  background-color: var(--blog-background);
+  min-width: var(--content-width);
   //   background: url("/imgs/home-bg.jpeg") no-repeat center;
 }
 

@@ -1,9 +1,10 @@
-FROM programmerzbb/node-nginx
+FROM node:18.0-alpine3.14 as build-stage
+# FROM programmerzbb/node-nginx
 # FROM programmerzbb/nginxweb
 
 WORKDIR /app
 
-RUN mkdir -p /app/nginx/html
+# RUN mkdir -p /app/nginx/html
 
 COPY . /app
 

@@ -1,46 +1,12 @@
 import type { GetStaticPaths, GetStaticProps } from "next";
-import Head from "next/head";
-import { useEffect, useState } from "react";
-
-import { Date } from "@/common/components/date";
-import { ContentLayout } from "@/components/contentLayout";
-import Link from "next/link";
+import { PostPage } from "@/components/postPage";
 
 import { FullPostData } from "../../types/blog";
 import { getAllPostIds, getPostData } from "../../lib/post";
-import styles from "./post.module.scss";
 
 export default function Post({ postData }: { postData: FullPostData }) {
-  const { title, contentHtml, date } = postData;
-
   return (
-    <>
-      <Head>
-        <title>{title}</title>
-      </Head>
-      <ContentLayout>
-        <div className={styles.main}>
-          <section className={styles.wrap}>
-            <div className={styles.postInfo}>
-              <div className={styles.infoTitle}>{title}</div>
-              <div className={styles.infoDate}>
-                <Date dateString={date} />
-              </div>
-            </div>
-            <div
-              id="preview"
-              className={styles.mdView}
-              dangerouslySetInnerHTML={{ __html: contentHtml }}
-            />
-          </section>
-          <div className={styles.backHome}>
-            <Link href="/" legacyBehavior>
-              ← Back to home
-            </Link>
-          </div>
-        </div>
-      </ContentLayout>
-    </>
+    <PostPage postData={postData} />
   );
 }
 
@@ -59,6 +25,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 /**
  * 返回所有可能的path
+ * You cannot use getStaticPaths with getServerSideProps
+ * * 不能在ssr中使用 getStaticPaths，只能在ssg中使用。因为是编译时预渲染，需要确定可能路径。
  */
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = await getAllPostIds();

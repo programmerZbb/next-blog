@@ -3,7 +3,9 @@ import path from "path";
 import matter from "gray-matter";
 import { remark } from "remark";
 import html from "remark-html";
-import { getPostsConf, getAllPostIdsByDir, getPostDataByLocalDir } from "./util";
+
+import { getArticleDetail } from './request/article-detail';
+import { getPostsConf, getAllPostIdsByDir, getPostDataByRemoteDir } from "./util";
 
 const postDir = path.join(process.cwd(), "./src/posts");
 
@@ -32,13 +34,23 @@ export function getStoredPostsData() {
 /**
  * 获取所有可能的id提供给
  */
-export function getAllPostIds() {
+export const getAllPostIds = async () => {
+  // 从远端拿取数据
   return getAllPostIdsByDir(postDir)
 }
 
 /**
  * 通过id获取post内容
  */
-export async function getPostData(id: string) {
-  return getPostDataByLocalDir(postDir, id)
+export const getPostData = async (id: string) => {
+  // 去远端拿数据
+  const res = await getArticleDetail({id});
+  const { contentHtml, menu } = await getPostDataByRemoteDir(res.contentPath, res.id + '');
+  return {
+    id,
+    contentHtml,
+    title: res.name,
+    date: res.updateTime,
+    menu,
+  };
 }

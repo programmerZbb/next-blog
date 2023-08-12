@@ -3,7 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 import { remark } from "remark";
 import html from "remark-html";
-import { getPostsConf, getAllPostIdsByDir, getPostDataByDir } from "./util";
+import { getPostsConf, getAllPostIdsByDir, getPostDataByLocalDir } from "./util";
 
 const wordDir = path.join(process.cwd(), "./src/words");
 
@@ -40,5 +40,5 @@ export function getAllPostIds() {
  * 通过id获取post内容
  */
 export async function getPostData(id: string) {
-  return getPostDataByDir(wordDir, id)
+  return getPostDataByLocalDir(wordDir, id)
 }

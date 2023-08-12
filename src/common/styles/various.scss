@@ -1,0 +1,18 @@
+// 一些公共的变量
+// 字体相关
+@mixin color-various {
+  ---blog-font-1: #252933;
+  ---blog-font-3: #8a919f;;
+}
+
+:root {
+  // 文章内容宽度
+  --content-width: 820px;
+  // 主题相关
+  --blog-background: #f2f3f5;
+  // 边框色
+  --blog-gray-1-2: #e4e6eb;
+  --blog-gray-3: #f7f8fa;
+  @include color-various;
+}
+

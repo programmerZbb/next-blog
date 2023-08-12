@@ -1,10 +1,16 @@
 import fs from "fs";
 import path from "path";
+// 解析头文件的
 import matter from "gray-matter";
+// 把md文件转换为 mast，md的抽象语法树
 import { remark } from "remark";
+// 一个 remark 的插件，将mast转换为hast，html版本的抽象语法树
 import html from "remark-html";
 import { marked, Renderer } from 'marked'
 import { load } from 'cheerio'
+import type { AnchorLinkItemProps } from 'antd/es/anchor/Anchor'
+
+import { md2html } from '../lib/page-utils/md2html';
 // import * as DOMPurify from 'dompurify'
 // console.log(DOMPurify.sanitize, sanitize,'------777777777')
 
@@ -75,32 +81,62 @@ const addIdForHtml = (html: string): string => {
   return $.html()
 }
 
-/**
- * 通过id获取post内容
- */
-export async function getPostDataByDir(dir: string, id: string) {
-  const fullPath = path.join(dir, `${id}.md`);
-  const fileContents = fs.readFileSync(fullPath, "utf8");
+// const contentHtml = await marked(fileContents, {
+  //   async: true,
+  //   renderer: new Renderer(),
+  //   gfm: true,
+  //   breaks: true,
+  // })
+  // console.log(levelContainer[0].children[1].children[5], '---menu225')
 
+const getMdDataByDir = async (dir: string) => {
+  const content = fs.readFileSync(dir, "utf8");
+  const { contentHtml, menu } = await md2html(content)
+  return {
+    contentHtml,
+    menu,
+  };
+}
+
+const getMdDataWithMetadata = async (dir: string, id: string) => {
+  const fileContents = fs.readFileSync(dir, "utf8");
+
+  // step1: 解析头文件
   const matterRes = matter(fileContents);
+  const { title, date } = matterRes.data as {
+    title?: string;
+    date?: string;
+  }
 
-  // use remark to convert markdown into html string
-  const processedContent = await remark().use(html).process(matterRes.content);
-  const contentHtml = addIdForHtml(processedContent.toString());
-
+  const { contentHtml, menu } = await md2html(matterRes.content)
   // const contentHtml = await marked(fileContents, {
   //   async: true,
   //   renderer: new Renderer(),
   //   gfm: true,
   //   breaks: true,
   // })
+  // console.log(levelContainer[0].children[1].children[5], '---menu225')
 
   return {
     id,
     contentHtml,
-    ...(matterRes.data as {
-      title: string;
-      date: string;
-    }),
+    title,
+    date,
+    menu,
   };
+}
+
+/**
+ * 通过id获取post内容
+ */
+export function getPostDataByLocalDir(dir: string, id: string) {
+  const fullPath = path.join(dir, `${id}.md`);
+  return getMdDataWithMetadata(fullPath, id);
+}
+
+
+// 从远端获取
+export function getPostDataByRemoteDir(dir: string, id: string) {
+  // const fullPath = path.join(dir, `${id}.md`);
+  return getMdDataByDir(dir);
 }
