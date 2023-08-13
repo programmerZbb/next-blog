@@ -1,4 +1,8 @@
 import { api } from '../apis/basic'
+import { SERVER_DOMAIN } from './util';
+
+export const UploadUrl = '/api/upload-buffer'
+
 export const upload = (data: {
   filename: string;
   tags?: Array<string>;
@@ -6,7 +10,6 @@ export const upload = (data: {
 }) => api.post<{
   access_token: string;
   refresh_token: string;
-}>('http://127.0.0.1:8081/api/upload-buffer', data, {
+}>(SERVER_DOMAIN + UploadUrl, data, {
   contentType: 'form-data',
 })
-export const UploadUrl = '/api/upload'
