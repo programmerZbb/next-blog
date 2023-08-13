@@ -10,7 +10,7 @@ COPY . /app
 
 # COPY ./chore/nginx/nginx.conf /usr/local/nginx/conf/nginx.conf
 
-RUN npm config set registry https://registry.npm.taobao.org \
+RUN npm config set registry https://registry.npmmirror.com/ \
     && npm i \
     && npm run build
 
