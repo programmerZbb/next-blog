@@ -54,7 +54,11 @@ const request = <TResponse>(apiInfo: {
     const info = await result.json()
     throw new RequestError('数据请求失败', result.status, info)
   }, rej => {
-    throw new RequestError('网络连接失败')
+    console.log(rej);
+    throw new RequestError('网络连接失败', undefined, {
+      url,
+      ...rej,
+    });
   }).then(data => {
     if (data.code && data.code === 200) {
       return data.data
