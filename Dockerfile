@@ -15,6 +15,8 @@ RUN npm i
 
 COPY . .
 
+RUN mkdir -p /data/uploads
+
 RUN npm run build
 
 # 不能再当前目录下执行打包命令，因为此时已经进入了docker内部文件
@@ -33,4 +35,4 @@ CMD npm run start
 # 打包
 # sudo docker build --force-rm -t programerzbb/blog:v3 .
 # 启动
-# sudo docker run -itd -p 8000:3000 --name blog-fe --rm programerzbb/blog:v3
+# sudo docker run -itd -p 8000:3000 -v $HOME/data/uploads:/data/uploads --name blog-fe --rm programerzbb/blog:v3
