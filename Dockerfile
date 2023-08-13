@@ -1,18 +1,21 @@
-FROM node:current-alpine3.17 as build-stage
+FROM node as build-stage
 # FROM programmerzbb/node-nginx
 # FROM programmerzbb/nginxweb
 
 WORKDIR /app
 
 # RUN mkdir -p /app/nginx/html
-
-COPY . /app
+COPY package.json .
 
 # COPY ./chore/nginx/nginx.conf /usr/local/nginx/conf/nginx.conf
 
-RUN npm config set registry https://registry.npmmirror.com/ \
-    && npm i \
-    && npm run build
+RUN npm config set registry https://r.cnpmjs.org
+
+RUN npm i
+
+COPY . .
+
+RUN npm run build
 
 # 不能再当前目录下执行打包命令，因为此时已经进入了docker内部文件
 # RUN npm i
