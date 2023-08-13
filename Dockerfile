@@ -9,7 +9,7 @@ COPY package.json .
 
 # COPY ./chore/nginx/nginx.conf /usr/local/nginx/conf/nginx.conf
 
-RUN npm config set registry https://r.cnpmjs.org
+RUN npm config set registry https://registry.npmmirror.com/
 
 RUN npm i
 

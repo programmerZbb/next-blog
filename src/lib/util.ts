@@ -90,6 +90,7 @@ const addIdForHtml = (html: string): string => {
   // console.log(levelContainer[0].children[1].children[5], '---menu225')
 
 const getMdDataByDir = async (dir: string) => {
+  console.log('当前dir为---', dir);
   const content = fs.readFileSync(dir, "utf8");
   const { contentHtml, menu } = await md2html(content)
   return {
