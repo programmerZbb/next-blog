@@ -1,4 +1,4 @@
-FROM node:18.0-alpine3.14 as build-stage
+FROM node:current-alpine3.17 as build-stage
 # FROM programmerzbb/node-nginx
 # FROM programmerzbb/nginxweb
 
