@@ -35,4 +35,5 @@ CMD npm run start
 # 打包
 # sudo docker build --force-rm -t programerzbb/blog:v3 .
 # 启动
-# sudo docker run -itd -p 8000:3000 -v $HOME/data/uploads:/data/uploads --name blog-fe --rm programerzbb/blog:v3
+# sudo docker run -itd -p 8000:3000 -v $HOME/data/uploads:/data/uploads --name blog-fe --rm programerzbb/blog:v3 # 失效：容器结束删除内容，不合理线上使用
+# sudo docker run -itd -p 8000:3000 -v $HOME/data/uploads:/data/uploads --name blog-fe --restart=always programerzbb/blog:v7

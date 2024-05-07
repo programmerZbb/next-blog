@@ -1,11 +1,18 @@
 import { api } from '../apis/basic'
-export const login = () => api.post<{
-  access_token: string;
-  refresh_token: string;
-}>('http://127.0.0.1:8086/api/login', {
-  "name": "zbbtest222",
-  "password": "test1234",
-}, {
-  contentType: 'form',
-})
+import { SERVER_DOMAIN } from './util';
+
+export interface LoginReq {
+  name: string;
+  password: string;
+  clientId?: string;
+  responseType?: string;
+  redirectUri?: string;
+}
+
+export interface LoginRes {
+  code: string;
+  redirectUri: string;
+}
+
+export const login = (req: LoginReq) => api.post<LoginRes>('http://127.0.0.1:8082' + LoginUrl, req)
 export const LoginUrl = '/api/login'

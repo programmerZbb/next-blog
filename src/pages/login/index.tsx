@@ -1,4 +1,5 @@
-import React, { FC, useCallback } from 'react';
+// 登录页，使用oauth2的方式进行鉴权。
+import React, { FC, useCallback, useEffect } from 'react';
 import { Button, Checkbox, Form, Input } from 'antd';
 import useSWR, { Fetcher } from 'swr'
 import useSWRImmutable from 'swr/immutable'
@@ -15,12 +16,40 @@ const fetcher: Fetcher<string> = (url: string) => {
 }
 
 const Login: FC = props => {
-  const onFinish = useCallback(() => {}, []);
+  const [form] = Form.useForm();
+
+  // 发起请求
+  const onFinish = useCallback(async () => {
+    const { username, password } = form.getFieldsValue();
+    const query = new URLSearchParams(location.search)
+    const client_id = query.get('client_id')
+    const response_type = query.get('response_type')
+    const redirect_uri = query.get('redirect_uri')
+    // todo 如果这三个值不存在会发生什么
+    if (client_id && response_type && redirect_uri) {
+      const res = await login({
+        name: username,
+        password,
+        clientId: client_id,
+        responseType: response_type,
+        redirectUri: redirect_uri,
+      })
+      window.location.href = `${res.redirectUri}?code=${res.code}`
+    }
+  }, [form]);
   const onFinishFailed = useCallback(() => {}, []);
   const shouldFetch = true
   const token = 'test'
 
   const { data, error } = useSWR<string>(LoginUrl, fetcher)
+
+  useEffect(() => {
+    const query = new URLSearchParams(location.search)
+    const client_id = query.get('client_id')
+    if (client_id != null) {
+
+    }
+  }, []);
 
   return (
     <div className={styles.wrap} hidden>
@@ -33,6 +62,7 @@ const Login: FC = props => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
+        form={form}
       >
         <Form.Item
           label=""
@@ -56,7 +86,7 @@ const Login: FC = props => {
 
         <Form.Item>
           <Button type="primary" htmlType="submit">
-            Submit
+            登录
           </Button>
         </Form.Item>
       </Form>

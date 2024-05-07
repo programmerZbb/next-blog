@@ -17,6 +17,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   // context 页面上的参数内容都有，方便后期请求！
   // console.log(context, '---context');
   const params = context.params;
+  // context.req // 这个就是客户端的请求，应该携带了鉴权信息
   const postData = await getPostData(params!.id! as string);
 
   return {
